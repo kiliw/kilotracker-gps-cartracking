@@ -28,7 +28,7 @@
 #include "Adafruit_FONA.h"
 #include <LowPower.h>
 #include <SoftwareSerial.h>
-#include "numberConfig.h" //include the information about telefonenumber and name
+#include "number_config.h" //include the information about telefonenumber and name
 
 
 #define FONA_RX 8

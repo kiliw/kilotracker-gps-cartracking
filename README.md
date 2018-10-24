@@ -3,13 +3,13 @@
 Use this code in combination with an Arduino Uno or Nano and a Sim808 module to get the location of your vehicle.
 
 # ToDo
-  [] include low power mode of gsm
+- [ ] include low power mode of gsm
 
- [] get interrupts working
+- [ ] get interrupts working
 
- []how to integrate interrupt on PIR when Arduino is in sleep mode and has no output voltage, maybe it has output voltage
+- [ ] how to integrate interrupt on PIR when Arduino is in sleep mode and has no output voltage, maybe it has output voltage
 
-[] PIR alarm triggers after 1 min, because pirMotion = true during interrupt
+- [ ] PIR alarm triggers after 1 min, because pirMotion = true during interrupt
 
 # Usage
 
