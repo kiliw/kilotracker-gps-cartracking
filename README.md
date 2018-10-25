@@ -1,8 +1,11 @@
 # kilotracker-gps-cartracking
 
-Use this code in combination with an Arduino Uno or Nano and a Sim808 module to get the location of your vehicle.
+If you want to secure your car you can use this code in combination with an Arduino Uno or Nano and a Sim808 module to get the location of your vehicle.
+
+So far the code is far from beeing perfect but it works. The goal is to improve it further so its easy to understand, use and customize to your own wishes.
 
 # ToDo
+
 - [ ] include low power mode of gsm
 
 - [ ] get interrupts working
@@ -12,6 +15,12 @@ Use this code in combination with an Arduino Uno or Nano and a Sim808 module to 
 - [ ] PIR alarm triggers after 1 min, because pirMotion = true during interrupt
 
 # Usage
+
+## Required Libraries
+
+- Adafruit_FONA
+- LowPower
+- SoftwareSerial
 
 ## Arduino Setup
 
@@ -26,11 +35,11 @@ After you've assembled your Arduino setup, go and create a `number_config.h` and
 
 `char mobileNumber[] = "+4912345678";`
 
-Where you should put in your own mobile number. You will get the location sent via SMS and a link to googlemaps. The program will also send a notification to this number if a foreign number is texting to it.
+This should be your own mobile number. You will get the location send via SMS and a link to googlemaps from the tracker. The program will also send a notification to this number if a foreign number is texting to it.
 
 ## Commands
 
-The desired command has to sent via SMS to the number in the Sim808. At the moment the following commands can be used:
+The desired command has to be sent via SMS to the number in the Sim808. At the moment the following commands can be used:
 
 `GPSON`: Switch on the GPS module
 
@@ -38,4 +47,4 @@ The desired command has to sent via SMS to the number in the Sim808. At the mome
 
 `GPSLO`: Get the current GPS location of the tracker
 
-
+## Example
