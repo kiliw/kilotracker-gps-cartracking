@@ -47,4 +47,8 @@ The desired command has to be sent via SMS to the number in the Sim808. At the m
 
 `GPSLO`: Get the current GPS location of the tracker
 
+`GSMRE`: Reset the Sim808
+
+`PIR`: Toggle PIR sensor on/off
+
 ## Example

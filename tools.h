@@ -290,3 +290,78 @@ void PIRtimerReset()
     timer = 0;        //Reset timer on PIR interrupt for sleep mode
     pirMotion = true; //activate ALARM
 }
+
+void optionSelector(int inputCase)
+{
+    caseCounter = inputCase;
+    switch (caseCounter)
+    {
+    case 1:
+        //PIR was triggerd, activate Alarm!
+
+        //uncomment, just for testing if PIR is working
+        //simPowerOn(); //uncomment when functional
+        //simStart();
+
+        fona.sendSMS(mobileNumber, "Duci braucht Hilfe!!!");
+        enableGPS();
+        getGPS(); //!!! here occures arduino restart
+
+        pirMotion = false;
+        caseCounter = 0;
+        timer = 0;
+        timer2 = 0;
+        break;
+    case 2:
+        //Message with GPSON was received!
+        enableGPS();
+        caseCounter = 0;
+        timer = 0;
+        break;
+    case 3:
+        //Message with GPSOF was received!
+        fona.enableGPS(false);
+        caseCounter = 0;
+        timer = 0;
+        break;
+    case 4:
+        //Message with GPSLO was received!
+        getGPS();
+        caseCounter = 0;
+        timer = 0;
+        break;
+    case 5:
+        //Message with GSMOF was received!
+        simPowerOff();
+        caseCounter = 0;
+        timer = 0;
+        break;
+    case 6:
+        //Message with GSMRE was received!
+        simPowerOff();
+        simPowerOn();
+        simStart();
+
+        caseCounter = 0;
+        timer = 0;
+        break;
+    case 7:
+        //Message with PIR was received!
+        if (pirState == LOW)
+        {
+            digitalWrite(PIRoutPin, HIGH); //set 5V for PIR
+            fona.sendSMS(mobileNumber, "PIR activated!");
+            pirState = HIGH;
+        }
+        else
+        {
+            digitalWrite(PIRoutPin, LOW);
+            fona.sendSMS(mobileNumber, "PIR deactivated!");
+            pirState = LOW;
+        }
+
+        caseCounter = 0;
+        timer = 0;
+        break;
+    } //End switch case
+}

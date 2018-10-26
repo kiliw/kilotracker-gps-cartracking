@@ -20,7 +20,7 @@
  */
 
 //---------------------------
-//++++++++ INITIALIZING ++++++++
+//++++++++ LIB IMPORT ++++++++
 //---------------------------
 #include "Adafruit_FONA.h"
 #include <LowPower.h>
@@ -81,78 +81,9 @@ void loop()
       }
     }
 
-    //Execute different actions depending on SMS you send
-    switch (caseCounter)
-    {
-    case 1:
-      //PIR was triggerd, activate Alarm!
+    optionSelector(caseCounter); //Execute different actions depending on SMS you send
 
-      //uncomment, just for testing if PIR is working
-      //simPowerOn(); //uncomment when functional
-      //simStart();
-
-      fona.sendSMS(mobileNumber, "Duci braucht Hilfe!!!");
-      enableGPS();
-      getGPS(); //!!! here occures arduino restart
-
-      pirMotion = false;
-      caseCounter = 0;
-      timer = 0;
-      timer2 = 0;
-      break;
-    case 2:
-      //Message with GPSON was received!
-      enableGPS();
-      caseCounter = 0;
-      timer = 0;
-      break;
-    case 3:
-      //Message with GPSOF was received!
-      fona.enableGPS(false);
-      caseCounter = 0;
-      timer = 0;
-      break;
-    case 4:
-      //Message with GPSLO was received!
-      getGPS();
-      caseCounter = 0;
-      timer = 0;
-      break;
-    case 5:
-      //Message with GSMOF was received!
-      simPowerOff();
-      caseCounter = 0;
-      timer = 0;
-      break;
-    case 6:
-      //Message with GSMRE was received!
-      simPowerOff();
-      simPowerOn();
-      simStart();
-
-      caseCounter = 0;
-      timer = 0;
-      break;
-    case 7:
-      //Message with PIR was received!
-      if (pirState == LOW)
-      {
-        digitalWrite(PIRoutPin, HIGH); //set 5V for PIR
-        fona.sendSMS(mobileNumber, "PIR activated!");
-        pirState = HIGH;
-      }
-      else
-      {
-        digitalWrite(PIRoutPin, LOW);
-        fona.sendSMS(mobileNumber, "PIR deactivated!");
-        pirState = LOW;
-      }
-
-      caseCounter = 0;
-      timer = 0;
-      break;
-    } //End switch case
-  }   //End while timer
+  } //End while timer
 
   //Enter low power Mode
   timer2 = 0;
